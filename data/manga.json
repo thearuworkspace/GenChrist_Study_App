@@ -1,0 +1,62 @@
+[
+  {
+    "id": "annunciation",
+    "title": "Chapter 1: The Annunciation",
+    "description": "The Angel Gabriel's message to the Virgin Mary in Nazareth.",
+    "coverUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop",
+    "r2BucketPrefix": "https://r2.genchrist.app/manga/annunciation",
+    "pages": [
+      {
+        "pageNumber": 1,
+        "imageUrl": "https://images.unsplash.com/photo-1447069387593-a5de0862481e?q=80&w=800&auto=format&fit=crop",
+        "r2Key": "page1.jpg",
+        "caption": "In the sixth month, the angel Gabriel was sent from God..."
+      },
+      {
+        "pageNumber": 2,
+        "imageUrl": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=800&auto=format&fit=crop",
+        "r2Key": "page2.jpg",
+        "caption": "...to a virgin betrothed to a man whose name was Joseph, of the house of David. The virgin's name was Mary."
+      },
+      {
+        "pageNumber": 3,
+        "imageUrl": "https://images.unsplash.com/photo-1461360228754-6e81c478b882?q=80&w=800&auto=format&fit=crop",
+        "r2Key": "page3.jpg",
+        "caption": "And he came to her and said, 'Hail, full of grace, the Lord is with you!'"
+      },
+      {
+        "pageNumber": 4,
+        "imageUrl": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop",
+        "r2Key": "page4.jpg",
+        "caption": "Mary was greatly troubled, but the angel said, 'Do not be afraid, Mary, for you have found favor with God.'"
+      }
+    ]
+  },
+  {
+    "id": "nativity",
+    "title": "Chapter 2: The Nativity",
+    "description": "Visualizing the birth of Jesus Christ in Bethlehem.",
+    "coverUrl": "https://images.unsplash.com/photo-1575550959106-5a7defe28b56?q=80&w=800&auto=format&fit=crop",
+    "r2BucketPrefix": "https://r2.genchrist.app/manga/nativity",
+    "pages": [
+      {
+        "pageNumber": 1,
+        "imageUrl": "https://images.unsplash.com/photo-1543807535-eceef0bc6599?q=80&w=800&auto=format&fit=crop",
+        "r2Key": "page1.jpg",
+        "caption": "Joseph and Mary travel to Bethlehem to be registered under Caesar Augustus's decree."
+      },
+      {
+        "pageNumber": 2,
+        "imageUrl": "https://images.unsplash.com/photo-1482862549707-f63cb32c5fd9?q=80&w=800&auto=format&fit=crop",
+        "r2Key": "page2.jpg",
+        "caption": "And there was no room for them in the inn."
+      },
+      {
+        "pageNumber": 3,
+        "imageUrl": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop",
+        "r2Key": "page3.jpg",
+        "caption": "She gave birth to her firstborn son and wrapped him in swaddling cloths, laying him in a manger."
+      }
+    ]
+  }
+]

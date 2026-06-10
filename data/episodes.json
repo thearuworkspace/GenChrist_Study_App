@@ -1,0 +1,50 @@
+[
+  {
+    "id": "episode-1",
+    "title": "Episode 1: The Call of the Word",
+    "description": "Discover your place in the grand narrative of the cosmos, guided by the Divine Logos.",
+    "content": [
+      "As you open this study, you stand at the threshold of a mystery that spans eternity. You are not a random product of cosmic dust; rather, you were spoken into existence by the Eternal Logos. [Why?|logos]",
+      "In your daily life, you search for truth and meaning. St. John's Gospel addresses this direct longing of your soul, telling you that the Light shines in the darkness, and the darkness has not overcome it. [Why?|light-overcome]",
+      "To understand your faith, you must understand the Incarnation—where God himself became flesh and dwelt among us, entering human history so that you could share in his divine life. [Why?|incarnation-life]"
+    ],
+    "triggers": {
+      "logos": {
+        "term": "The Eternal Logos",
+        "explanation": "The term 'Logos' (Greek for 'Word' or 'Reason') is used by St. John to describe the Second Person of the Trinity, Jesus Christ. By calling him the Logos, scripture asserts that the Creator of the universe is not a distant force, but the supreme Reason and Word through whom you were created and redeemed.",
+        "historicalContext": "In Greek philosophy (Heraclitus, Philo), the Logos was the rational principle ordering the cosmos. St. John radicalized this by declaring that this cosmic principle is a personal Being who became a man."
+      },
+      "light-overcome": {
+        "term": "Light and Darkness",
+        "explanation": "The battle between light and darkness in St. John's prologue is both cosmic and deeply personal. It assures you that no matter how deep the darkness of sin, suffering, or doubt in your life is, the light of Christ remains unconquered.",
+        "historicalContext": "The contrast between light and darkness is a key theme in the Dead Sea Scrolls (Qumran). John uses this familiar imagery to proclaim Jesus as the ultimate victory of light."
+      },
+      "incarnation-life": {
+        "term": "The Incarnation",
+        "explanation": "The mystery of the Son of God assuming human nature. The Catechism teaches that God became man so that we might become God (divinization/theosis), elevating human nature to participate in the divine life.",
+        "historicalContext": "The early Church fought numerous heresies (such as Gnosticism and Arianism) to preserve this truth. St. Athanasius famously wrote: 'He was made man that we might be made God.'"
+      }
+    }
+  },
+  {
+    "id": "episode-2",
+    "title": "Episode 2: Walking with Tobit",
+    "description": "Accompany Tobit in his exile and discover how God works invisibly in times of trial.",
+    "content": [
+      "Imagine yourself in Nineveh, exiled from your homeland. You watch Tobit risk his life to perform works of mercy, burying the dead despite the king's threats. [Why?|works-mercy]",
+      "You might wonder why a righteous man like Tobit is allowed to suffer blindness and poverty. This is the mystery of Divine Providence—where God prepares Raphael the archangel to guide Tobit's son, Tobias, on a journey of healing. [Why?|raphael-providence]"
+    ],
+    "triggers": {
+      "works-mercy": {
+        "term": "Corporal Works of Mercy",
+        "explanation": "Burying the dead is one of the seven Corporal Works of Mercy. Tobit's dedication shows that faith must be active in charity, even when it costs us our safety or social standing.",
+        "historicalContext": "In ancient Assyria, leaving enemies' bodies unburied was a common practice of dishonor. Tobit's actions were acts of political defiance and religious fidelity."
+      },
+      "raphael-providence": {
+        "term": "St. Raphael and Providence",
+        "explanation": "Raphael (whose name means 'God heals') travels in disguise. This illustrates how God's help often comes in ordinary, hidden ways. Divine Providence operates through human agents and events to guide us.",
+        "historicalContext": "The Book of Tobit is one of the Deuterocanonical books. It was included in the Greek Septuagint translation of the Old Testament, which was used by the Apostles and early Christians."
+      }
+    }
+  }
+]
