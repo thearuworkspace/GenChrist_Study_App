@@ -11,7 +11,6 @@ import {
   Sparkles, 
   Server, 
   Compass, 
-  ChevronDown, 
   Plus, 
   Minus,
   Sparkle
@@ -31,7 +30,7 @@ export default function Home() {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // Standard Framer Motion scroll entry spring animations
+  // Scroll animations for page entry states using spring physics
   const scrollSpringVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { 
@@ -41,7 +40,7 @@ export default function Home() {
     }
   };
 
-  // Tactile Spring Button & Card variants (using spring physics: stiffness 200)
+  // Tactile Spring Button variants
   const springClickVariants = {
     initial: {
       scale: 1,
@@ -50,32 +49,39 @@ export default function Home() {
     hover: {
       scale: 1.015,
       y: -2,
+      borderColor: "rgba(214, 175, 55, 0.4)",
+      boxShadow: "0 0 30px rgba(214, 175, 55, 0.15)",
       transition: { type: "spring" as const, stiffness: 200, damping: 12 }
     },
     tap: {
       scale: 0.985,
       y: 1,
+      boxShadow: "0 0 15px rgba(214, 175, 55, 0.05)",
       transition: { type: "spring" as const, stiffness: 200, damping: 8 }
     }
   };
 
+  // Bento Card hover animation: border color shift & gold-glow glow activation
   const bentoCardVariants = {
     initial: {
-      scale: 1,
-      y: 0
+      borderColor: "rgba(255, 255, 255, 0.05)",
+      boxShadow: "0 0 25px rgba(214, 175, 55, 0)",
     },
     hover: {
-      scale: 0.995,
-      y: 0,
-      transition: { type: "spring" as const, stiffness: 200, damping: 15 }
-    },
-    tap: {
-      scale: 0.98,
-      y: 0,
-      transition: { type: "spring" as const, stiffness: 200, damping: 10 }
+      borderColor: "rgba(214, 175, 55, 0.3)",
+      boxShadow: "0 0 40px rgba(214, 175, 55, 0.18)",
+      transition: { type: "spring" as const, stiffness: 200, damping: 20 }
     }
   };
 
+  // Inner text shifts up 4px on bento card hover
+  const innerTextVariants = {
+    initial: { y: 0 },
+    hover: { 
+      y: -4, 
+      transition: { type: "spring" as const, stiffness: 200, damping: 15 } 
+    }
+  };
 
   // Saint of the day data
   const saint = {
@@ -105,7 +111,7 @@ export default function Home() {
     },
     {
       question: "How does this application function 100% database-free and serverless?",
-      answer: "GenChrist is engineered as a serverless static application. Instead of relying on a live relational database which introduces latency and operational overhead, the entire library of scriptures, episodic commentaries, and manga assets are pre-compiled into local structured JSON layout data profiles. This ensures that the app loads instantly, runs with zero server cost, and is fully optimized for static CDN edge deployments like Vercel's hobby tier."
+      answer: "GenChrist is engineered as a serverless static application. Instead of relying on a live relational database which introduces latency and operational overhead, the entire library of scriptures, episodic commentaries, and manga assets are pre-compiled into local structured JSON data profiles. This ensures that the app loads instantly, runs with zero server cost, and is fully optimized for static CDN edge deployments like Vercel's hobby tier."
     },
     {
       question: "How does this app integrate Catholic Theology with Science and Archaeology?",
@@ -115,8 +121,8 @@ export default function Home() {
 
   if (!isMounted) {
     return (
-      <div className="min-h-screen bg-[#FAF9F6] dark:bg-liturgy-dark flex items-center justify-center transition-colors duration-300">
-        <div className="text-amber-800 dark:text-liturgy-gold font-serif text-xl animate-pulse flex items-center space-x-2">
+      <div className="min-h-screen bg-[#FAF9F6] dark:bg-cyber-black flex items-center justify-center transition-colors duration-300">
+        <div className="text-amber-850 dark:text-cyber-gold font-serif text-xl animate-pulse flex items-center space-x-2">
           <Sparkles className="h-5 w-5 animate-spin" />
           <span>Loading GenChrist System...</span>
         </div>
@@ -125,39 +131,43 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FAF9F6] dark:bg-liturgy-dark text-liturgy-stone-dark dark:text-liturgy-stone-light transition-colors duration-300 overflow-x-hidden">
+    <main className="min-h-screen bg-[#FAF9F6] dark:bg-cyber-black text-liturgy-stone-dark dark:text-liturgy-stone-light transition-colors duration-300 overflow-x-hidden">
       
-      {/* 1. CINEMATIC HERO SECTION */}
-      <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 border-b border-black/5 dark:border-white/5 bg-gradient-to-b from-[#FAF9F6] via-[#F5F5F0] to-[#FAF9F6] dark:from-liturgy-dark dark:via-[#191919] dark:to-liturgy-dark transition-colors duration-300">
-        {/* Background radial glows */}
-        <div className="absolute top-1/4 left-1/2 -z-10 h-[600px] w-[600px] sm:h-[800px] sm:w-[800px] -translate-x-1/2 rounded-full bg-gradient-radial from-liturgy-cyan/10 to-transparent blur-3xl opacity-75 dark:opacity-40" />
-        <div className="absolute bottom-1/4 left-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-gradient-radial from-liturgy-gold/10 to-transparent blur-3xl opacity-75 dark:opacity-40" />
+      {/* 1. CINEMATIC HERO ARENA */}
+      <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 border-b border-black/5 dark:border-white/5 bg-gradient-to-b from-[#FAF9F6] via-[#F5F5F0] to-[#FAF9F6] dark:from-cyber-black dark:via-[#090909] dark:to-cyber-black transition-colors duration-300 py-40 gap-12">
+        {/* Background neon radial glows */}
+        <div className="absolute top-1/4 left-1/2 -z-10 h-[600px] w-[600px] sm:h-[800px] sm:w-[800px] -translate-x-1/2 rounded-full bg-gradient-radial from-cyber-gold/5 to-transparent blur-3xl opacity-75 dark:opacity-40" />
 
-        <div className="max-w-4xl mx-auto space-y-8 relative z-10 flex flex-col items-center">
-          {/* Glowing Badge tag */}
+        <div className="max-w-4xl mx-auto space-y-12 relative z-10 flex flex-col items-center">
+          {/* Glowing Monospace Subheading with extreme spacing (0.4em) */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center space-x-2 rounded-full border border-liturgy-cyan/20 dark:border-liturgy-gold/25 bg-liturgy-cyan/5 px-4 py-1.5 text-xs font-semibold text-liturgy-cyan dark:text-liturgy-gold tracking-wider uppercase shadow-[inset_1px_1px_2px_rgba(6,182,212,0.15)] dark:shadow-gold-rim"
+            className="font-mono text-xs sm:text-sm font-bold tracking-[0.4em] text-amber-800 dark:text-cyber-gold uppercase"
           >
-            <Sparkles className="h-3.5 w-3.5 text-liturgy-cyan dark:text-liturgy-gold animate-pulse" />
-            <span>Sensus Fidei, Revelatio, et Scientia</span>
+            Sensus Fidei et Ratio
           </motion.div>
 
-          {/* Extruded Hero Console Panel (Skeuomorphic & Neumorphic workstation header wrapper) */}
-          <div className="bg-[#FAF9F6] dark:bg-liturgy-stone border border-black/5 dark:border-liturgy-gold/20 shadow-[6px_6px_14px_rgba(0,0,0,0.06),_-6px_-6px_14px_rgba(255,255,255,0.7)] dark:shadow-neumorphic-flat rounded-3xl p-8 sm:p-12 w-full max-w-3xl space-y-6 transition-colors duration-300">
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
-              <span className="bg-gradient-to-r from-amber-900 via-liturgy-cyan to-amber-700 dark:from-liturgy-stone-light dark:via-liturgy-cyan dark:to-liturgy-gold bg-clip-text text-transparent">
-                GenChrist Study App
-              </span>
-            </h1>
+          {/* Title with extreme tracking (0.2em) */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-serif text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-[0.2em] uppercase leading-none"
+          >
+            <span className="bg-gradient-to-r from-amber-900 via-liturgy-cyan to-amber-700 dark:from-liturgy-stone-light dark:via-liturgy-stone-light dark:to-cyber-gold bg-clip-text text-transparent">
+              GenChrist
+            </span>
+          </motion.h1>
 
-            <p className="mx-auto max-w-xl text-sm sm:text-base text-liturgy-stone-dark/80 dark:text-liturgy-stone-gray leading-relaxed">
+          {/* Clean Glass Overlay Container */}
+          <div className="bg-white/10 dark:bg-white/[0.01] backdrop-blur-2xl border border-black/5 dark:border-white/5 shadow-none rounded-3xl p-8 sm:p-10 max-w-2xl space-y-6 transition-colors">
+            <p className="text-sm sm:text-base text-liturgy-stone-dark/80 dark:text-liturgy-stone-gray leading-relaxed max-w-xl mx-auto">
               Immerse yourself in complete Catholic Scripture, interactive theological tracks, and high-definition narrative manga. Harmonizing divine revelation, historical archaeology, and cosmological science.
             </p>
 
-            {/* Skeuomorphic Spring CTA Button */}
+            {/* Tactile Spring CTA Button */}
             <div className="pt-4">
               <motion.button
                 variants={springClickVariants}
@@ -165,7 +175,7 @@ export default function Home() {
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => document.getElementById("bento-showcase")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-8 py-3.5 rounded-xl border border-amber-800/40 dark:border-liturgy-gold/40 bg-gradient-to-b from-amber-600 to-amber-700 dark:from-[#2a2a2a] dark:to-[#1a1a1a] text-white dark:text-liturgy-gold font-serif font-bold tracking-wide uppercase transition-colors shadow-[0_4px_6px_rgba(0,0,0,0.15),_inset_0_1px_1px_rgba(255,255,255,0.3)] dark:shadow-neumorphic-flat hover:dark:shadow-neumorphic-pressed cursor-pointer"
+                className="px-8 py-3.5 rounded-xl border border-amber-800/40 dark:border-cyber-gold/40 bg-gradient-to-b from-amber-600 to-amber-700 dark:from-[#151515] dark:to-cyber-black text-white dark:text-cyber-gold font-serif font-bold tracking-wide uppercase transition-colors shadow-md cursor-pointer"
               >
                 Begin Exploration
               </motion.button>
@@ -174,17 +184,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. ASYMMETRICAL BENTO GRID SHOWCASE */}
+      {/* 2. BENTO WORKSTATIONS GRID (Variable-width Glass panels with text shifting) */}
       <motion.section 
         id="bento-showcase"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={scrollSpringVariants}
-        className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12"
+        className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12"
       >
         <div className="text-center md:text-left space-y-2">
-          <span className="text-xs font-semibold text-liturgy-cyan dark:text-liturgy-gold tracking-widest uppercase">
+          <span className="text-xs font-semibold text-liturgy-cyan dark:text-cyber-gold tracking-widest uppercase">
             Feature Architecture
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-liturgy-stone-dark dark:text-liturgy-stone-light">
@@ -196,162 +206,141 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Tile 1: Scripture Workstation (Takes 2 cols, 2 rows) */}
-          <motion.div
+          <MotionLink
+            href="/bible"
             variants={bentoCardVariants}
             initial="initial"
             whileHover="hover"
-            whileTap="tap"
-            className="md:col-span-2 md:row-span-2 rounded-2xl border border-black/5 dark:border-liturgy-gold/20 bg-white dark:bg-liturgy-stone shadow-[6px_6px_14px_rgba(0,0,0,0.06),_-6px_-6px_14px_rgba(255,255,255,0.7)] dark:shadow-neumorphic-flat hover:dark:shadow-neumorphic-pressed p-6 sm:p-8 flex flex-col justify-between transition-colors duration-300"
+            className="md:col-span-2 md:row-span-2 rounded-2xl border bg-white/10 dark:bg-white/[0.01] backdrop-blur-2xl p-6 sm:p-8 flex flex-col justify-between transition-colors duration-300 relative group overflow-hidden"
           >
-            <div className="space-y-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-liturgy-gold/15 dark:to-transparent border border-amber-800/20 dark:border-liturgy-gold/30 text-amber-800 dark:text-liturgy-gold">
-                <BookOpen className="h-6 w-6" />
-              </div>
-              
-              <div className="space-y-3">
-                <h3 className="font-serif text-2xl font-bold text-liturgy-stone-dark dark:text-liturgy-stone-light">
-                  Interactive Scripture Workstation
-                </h3>
-                <p className="text-sm leading-relaxed text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray">
-                  A high-legibility interface built for deep exegesis. Hover over verse lines to reveal quick interaction chips. Dive into theological reflection, historical archaeology commentaries, and Catechism links inside a side-by-side split workstation or responsive sliding mobile drawer.
-                </p>
+            <motion.div variants={innerTextVariants} className="space-y-6 flex-grow flex flex-col justify-between">
+              <div className="space-y-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/10 to-amber-600/5 dark:from-cyber-gold/15 dark:to-transparent border border-amber-800/20 dark:border-cyber-gold/30 text-amber-800 dark:text-cyber-gold">
+                  <BookOpen className="h-6 w-6" />
+                </div>
+                
+                <div className="space-y-3">
+                  <h3 className="font-serif text-2xl font-bold text-liturgy-stone-dark dark:text-liturgy-stone-light">
+                    Interactive Scripture Workstation
+                  </h3>
+                  <p className="text-sm leading-relaxed text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray">
+                    A high-legibility interface built for deep exegesis. Hover over verse lines to reveal quick interaction chips. Dive into theological reflection, historical archaeology commentaries, and Catechism links inside a side-by-side split workstation or responsive sliding mobile drawer.
+                  </p>
+                </div>
+
+                {/* Book indicators visual detail */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {["Genesis (OT)", "Tobit (Deuterocanon)", "John (NT - Coming Soon)"].map((book) => (
+                    <span 
+                      key={book}
+                      className="inline-flex items-center space-x-1.5 rounded-full border border-black/10 dark:border-white/5 bg-black/5 dark:bg-white/5 px-3 py-1 text-xs text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray"
+                    >
+                      <Sparkle className="h-3 w-3 text-cyber-gold" />
+                      <span>{book}</span>
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              {/* Book indicators visual detail */}
-              <div className="flex flex-wrap gap-2 pt-2">
-                {["Genesis (OT)", "Tobit (Deuterocanon)", "John (NT - Coming Soon)"].map((book) => (
-                  <span 
-                    key={book}
-                    className="inline-flex items-center space-x-1.5 rounded-full border border-black/10 dark:border-white/5 bg-black/5 dark:bg-white/5 px-3 py-1 text-xs text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray"
-                  >
-                    <Sparkle className="h-3 w-3 text-liturgy-gold" />
-                    <span>{book}</span>
-                  </span>
-                ))}
+              <div className="pt-8">
+                <span className="inline-flex items-center space-x-1.5 text-xs font-semibold text-cyber-gold tracking-wider uppercase group-hover:underline">
+                  <span>Open Workstation</span>
+                  <span>→</span>
+                </span>
               </div>
-            </div>
-
-            <div className="pt-8">
-              <Link href="/bible" className="inline-block">
-                <motion.button 
-                  variants={springClickVariants}
-                  initial="initial"
-                  whileHover="hover"
-                  whileTap="tap"
-                  className="px-6 py-2.5 rounded-lg text-white dark:text-liturgy-gold text-xs font-bold tracking-wider uppercase border border-amber-800/40 dark:border-liturgy-gold/40 bg-gradient-to-b from-amber-600 to-amber-700 dark:from-[#2a2a2a] dark:to-[#1a1a1a] shadow-[0_2px_4px_rgba(0,0,0,0.1),_inset_0_1px_1px_rgba(255,255,255,0.3)] dark:shadow-neumorphic-flat hover:dark:shadow-neumorphic-pressed cursor-pointer"
-                >
-                  Open Workstation
-                </motion.button>
-              </Link>
-            </div>
-          </motion.div>
+            </motion.div>
+          </MotionLink>
 
           {/* Tile 2: Manga Archive (Takes 1 col, 2 rows) */}
-          <motion.div
+          <MotionLink
+            href="/manga"
             variants={bentoCardVariants}
             initial="initial"
             whileHover="hover"
-            whileTap="tap"
-            className="md:col-span-1 md:row-span-2 rounded-2xl border border-black/5 dark:border-liturgy-gold/20 bg-white dark:bg-liturgy-stone shadow-[6px_6px_14px_rgba(0,0,0,0.06),_-6px_-6px_14px_rgba(255,255,255,0.7)] dark:shadow-neumorphic-flat hover:dark:shadow-neumorphic-pressed p-6 flex flex-col justify-between transition-colors duration-300"
+            className="md:col-span-1 md:row-span-2 rounded-2xl border bg-white/10 dark:bg-white/[0.01] backdrop-blur-2xl p-6 flex flex-col justify-between transition-colors duration-300 relative group overflow-hidden"
           >
-            <div className="space-y-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-liturgy-cyan/15 to-transparent border border-liturgy-cyan/30 text-liturgy-cyan">
-                <ImageIcon className="h-6 w-6" />
-              </div>
-              
-              <div className="space-y-3">
-                <h3 className="font-serif text-2xl font-bold text-liturgy-stone-dark dark:text-liturgy-stone-light">
-                  Manga Archive
-                </h3>
-                <p className="text-sm leading-relaxed text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray">
-                  Graphic novels visually interpreting sacred accounts. Built with swipe transition frames and image-scaling layouts accepting public external asset paths hosted on Cloudflare R2 nodes.
-                </p>
-              </div>
-
-              {/* R2 serverless node diagram representation */}
-              <div className="rounded-xl border border-black/5 dark:border-white/5 bg-black/5 dark:bg-liturgy-charcoal/50 p-4 space-y-2 text-xs shadow-inner">
-                <div className="flex items-center space-x-1.5 font-bold text-liturgy-cyan uppercase tracking-wider text-[10px]">
-                  <Server className="h-3.5 w-3.5 animate-pulse" />
-                  <span>R2 Storage Pipeline</span>
+            <motion.div variants={innerTextVariants} className="space-y-6 flex-grow flex flex-col justify-between">
+              <div className="space-y-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-liturgy-cyan/15 to-transparent border border-liturgy-cyan/30 text-liturgy-cyan">
+                  <ImageIcon className="h-6 w-6" />
                 </div>
-                <code className="text-[10px] text-amber-800 dark:text-liturgy-gold break-all block leading-tight font-mono p-1.5 rounded bg-white dark:bg-[#1c1c1a] border border-black/5 dark:border-white/5">
-                  cdn.genchrist.app/manga/ch1
-                </code>
-              </div>
-            </div>
+                
+                <div className="space-y-3">
+                  <h3 className="font-serif text-2xl font-bold text-liturgy-stone-dark dark:text-liturgy-stone-light">
+                    Manga Archive
+                  </h3>
+                  <p className="text-sm leading-relaxed text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray">
+                    Graphic novels visually interpreting sacred accounts. Built with swipe transition frames and image-scaling layouts accepting public external asset paths hosted on Cloudflare R2 nodes.
+                  </p>
+                </div>
 
-            <div className="pt-8">
-              <Link href="/manga" className="inline-block w-full">
-                <motion.button 
-                  variants={springClickVariants}
-                  initial="initial"
-                  whileHover="hover"
-                  whileTap="tap"
-                  className="w-full px-6 py-2.5 rounded-lg text-white dark:text-liturgy-cyan text-xs font-bold tracking-wider uppercase border border-liturgy-cyan/40 bg-gradient-to-b from-liturgy-cyan to-blue-600 dark:from-[#2a2a2a] dark:to-[#1a1a1a] shadow-[0_2px_4px_rgba(0,0,0,0.1),_inset_0_1px_1px_rgba(255,255,255,0.3)] dark:shadow-neumorphic-flat hover:dark:shadow-neumorphic-pressed cursor-pointer"
-                >
-                  Browse Manga
-                </motion.button>
-              </Link>
-            </div>
-          </motion.div>
+                {/* R2 serverless node diagram representation */}
+                <div className="rounded-xl border border-black/5 dark:border-white/5 bg-black/5 dark:bg-cyber-black/50 p-4 space-y-2 text-xs">
+                  <div className="flex items-center space-x-1.5 font-bold text-liturgy-cyan uppercase tracking-wider text-[10px]">
+                    <Server className="h-3.5 w-3.5 animate-pulse" />
+                    <span>R2 Storage Pipeline</span>
+                  </div>
+                  <code className="text-[10px] text-amber-800 dark:text-cyber-gold break-all block leading-tight font-mono p-1.5 rounded bg-white dark:bg-cyber-black border border-black/5 dark:border-white/5">
+                    cdn.genchrist.app/manga/ch1
+                  </code>
+                </div>
+              </div>
+
+              <div className="pt-8">
+                <span className="inline-flex items-center space-x-1.5 text-xs font-semibold text-cyber-gold tracking-wider uppercase group-hover:underline">
+                  <span>Browse Manga</span>
+                  <span>→</span>
+                </span>
+              </div>
+            </motion.div>
+          </MotionLink>
 
           {/* Tile 3: Study Tracks (Takes 1 col, 1 row) */}
-          <motion.div
+          <MotionLink
+            href="/study"
             variants={bentoCardVariants}
             initial="initial"
             whileHover="hover"
-            whileTap="tap"
-            className="md:col-span-1 md:row-span-1 rounded-2xl border border-black/5 dark:border-liturgy-gold/20 bg-white dark:bg-liturgy-stone shadow-[6px_6px_14px_rgba(0,0,0,0.06),_-6px_-6px_14px_rgba(255,255,255,0.7)] dark:shadow-neumorphic-flat hover:dark:shadow-neumorphic-pressed p-6 flex flex-col justify-between transition-colors duration-300"
+            className="md:col-span-1 md:row-span-1 rounded-2xl border bg-white/10 dark:bg-white/[0.01] backdrop-blur-2xl p-6 flex flex-col justify-between transition-colors duration-300 relative group overflow-hidden"
           >
-            <div className="space-y-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400">
-                <BookMarked className="h-5 w-5" />
+            <motion.div variants={innerTextVariants} className="space-y-4 flex-grow flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400">
+                  <BookMarked className="h-5 w-5" />
+                </div>
+                
+                <div className="space-y-1">
+                  <h4 className="font-serif text-lg font-bold text-liturgy-stone-dark dark:text-liturgy-stone-light">
+                    Conversational Tracks
+                  </h4>
+                  <p className="text-xs text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray leading-normal">
+                    Prose that directly addresses you. Touch golden triggers to open deep doctrine modals.
+                  </p>
+                </div>
               </div>
-              
-              <div className="space-y-1">
-                <h4 className="font-serif text-lg font-bold text-liturgy-stone-dark dark:text-liturgy-stone-light">
-                  Conversational Tracks
-                </h4>
-                <p className="text-xs text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray leading-normal">
-                  Prose that directly addresses you. Touch golden triggers to open deep doctrine modals.
-                </p>
-              </div>
-            </div>
 
-            <div className="pt-4">
-              <Link href="/study" className="inline-block w-full">
-                <motion.button 
-                  variants={springClickVariants}
-                  initial="initial"
-                  whileHover="hover"
-                  whileTap="tap"
-                  className="w-full px-4 py-2 rounded-lg text-white dark:text-purple-400 text-[10px] font-bold tracking-wider uppercase border border-purple-500/40 bg-gradient-to-b from-purple-500 to-indigo-600 dark:from-[#2a2a2a] dark:to-[#1a1a1a] shadow-[0_2px_4px_rgba(0,0,0,0.1)] dark:shadow-neumorphic-flat hover:dark:shadow-neumorphic-pressed cursor-pointer"
-                >
-                  Start Study
-                </motion.button>
-              </Link>
-            </div>
-          </motion.div>
+              <div className="pt-4">
+                <span className="inline-flex items-center space-x-1.5 text-xs font-semibold text-cyber-gold tracking-wider uppercase group-hover:underline">
+                  <span>Start Study</span>
+                  <span>→</span>
+                </span>
+              </div>
+            </motion.div>
+          </MotionLink>
 
           {/* Tile 4: Saint of the Day (Takes 2 cols, 1 row) */}
-          <motion.div
-            variants={bentoCardVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            className="md:col-span-2 md:row-span-1 rounded-2xl border border-black/5 dark:border-liturgy-gold/20 bg-white dark:bg-liturgy-stone shadow-[6px_6px_14px_rgba(0,0,0,0.06),_-6px_-6px_14px_rgba(255,255,255,0.7)] dark:shadow-neumorphic-flat hover:dark:shadow-neumorphic-pressed p-6 relative overflow-hidden flex flex-col justify-between transition-colors duration-300"
-          >
+          <div className="md:col-span-2 md:row-span-1 rounded-2xl border border-black/5 dark:border-white/5 bg-white/10 dark:bg-white/[0.01] backdrop-blur-2xl p-6 relative overflow-hidden flex flex-col justify-between transition-colors duration-300">
             {/* Corner Glow */}
-            <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-liturgy-gold/5 dark:bg-liturgy-gold/10 blur-xl" />
+            <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-cyber-gold/5 dark:bg-cyber-gold/10 blur-xl" />
             
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start relative z-10">
-              <div className="flex-shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-liturgy-gold/20 to-amber-500/10 border border-liturgy-gold/30 text-amber-800 dark:text-liturgy-gold shadow-md">
+              <div className="flex-shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyber-gold/20 to-amber-500/10 border border-cyber-gold/30 text-amber-800 dark:text-cyber-gold shadow-md">
                 <Flame className="h-5.5 w-5.5 animate-pulse" />
               </div>
               
               <div className="space-y-2 flex-grow">
                 <div className="space-y-0.5">
-                  <div className="flex flex-wrap items-center gap-x-2 text-[10px] font-bold text-amber-800 dark:text-liturgy-gold tracking-widest uppercase">
+                  <div className="flex flex-wrap items-center gap-x-2 text-[10px] font-bold text-amber-800 dark:text-cyber-gold tracking-widest uppercase">
                     <span>Saint of the Day</span>
                     <span className="text-liturgy-stone-gray">•</span>
                     <span>Feast: {saint.feastDay}</span>
@@ -361,7 +350,7 @@ export default function Home() {
                   </h3>
                 </div>
                 
-                <blockquote className="border-l-2 border-amber-800 dark:border-liturgy-gold pl-3 py-0.5">
+                <blockquote className="border-l-2 border-amber-800 dark:border-cyber-gold pl-3 py-0.5">
                   <p className="font-serif text-sm italic text-liturgy-stone-dark/95 dark:text-liturgy-stone-light">
                     &ldquo;{saint.quote}&rdquo;
                   </p>
@@ -372,7 +361,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </motion.section>
@@ -383,10 +372,10 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={scrollSpringVariants}
-        className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+        className="py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
       >
-        {/* Glassmorphic layered border & rim shadows */}
-        <div className="rounded-3xl bg-white/[0.03] backdrop-blur-xl border border-liturgy-gold/20 shadow-gold-rim p-8 sm:p-12 transition-colors duration-300">
+        {/* Glassmorphic layered border & rim shadows - true glass sheet */}
+        <div className="rounded-3xl bg-white/10 dark:bg-white/[0.01] backdrop-blur-2xl border border-black/5 dark:border-white/5 shadow-gold-glow p-8 sm:p-12 transition-colors duration-300">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             
             {/* Column 1: Heading & Description */}
@@ -397,7 +386,7 @@ export default function Home() {
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-liturgy-stone-dark dark:text-liturgy-stone-light leading-tight">
                 Synthesizing Faith, Science & Archaeology
               </h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-liturgy-cyan to-liturgy-gold" />
+              <div className="h-1 w-20 bg-gradient-to-r from-liturgy-cyan to-cyber-gold" />
               <p className="text-sm sm:text-base leading-relaxed text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray">
                 Following the Catholic philosophical legacy of St. Anselm (*Fides quaerens intellectum* - faith seeking understanding), the GenChrist Study App holds that divine revelation, scientific cosmological facts, and archaeological truths cannot contradict one another. They are distinct reflections of the same Logos.
               </p>
@@ -408,7 +397,7 @@ export default function Home() {
               
               {/* Category 1 */}
               <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 border border-amber-800/15 dark:border-liturgy-gold/30 text-amber-800 dark:text-liturgy-gold shadow-sm">
+                <div className="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 border border-amber-800/15 dark:border-cyber-gold/30 text-amber-800 dark:text-cyber-gold shadow-sm">
                   <Flame className="h-5 w-5" />
                 </div>
                 <div className="space-y-1">
@@ -463,16 +452,16 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={scrollSpringVariants}
-        className="py-16 bg-[#F5F5F0] dark:bg-[#161614] border-y border-black/5 dark:border-white/5 transition-colors duration-300"
+        className="py-16 bg-[#F5F5F0] dark:bg-cyber-black border-y border-black/5 dark:border-white/5 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <div 
                 key={stat.label}
-                className="rounded-2xl border border-black/5 dark:border-liturgy-gold/20 bg-[#FAF9F6] dark:bg-liturgy-stone shadow-[6px_6px_14px_rgba(0,0,0,0.06),_-6px_-6px_14px_rgba(255,255,255,0.7)] dark:shadow-neumorphic-flat p-6 space-y-3 transition-all duration-300 hover:scale-[1.01]"
+                className="rounded-2xl border border-black/5 dark:border-white/5 bg-white/10 dark:bg-white/[0.01] backdrop-blur-2xl shadow-gold-glow hover:shadow-gold-glow-hover p-6 space-y-3 transition-all duration-300 hover:scale-[1.01]"
               >
-                <div className="font-serif text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-amber-700 to-liturgy-cyan dark:from-liturgy-gold dark:to-liturgy-cyan bg-clip-text text-transparent">
+                <div className="font-serif text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-amber-700 to-liturgy-cyan dark:from-cyber-gold dark:to-liturgy-cyan bg-clip-text text-transparent">
                   {stat.value}
                 </div>
                 <div className="font-serif text-sm font-bold text-liturgy-stone-dark dark:text-liturgy-stone-light">
@@ -493,10 +482,10 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={scrollSpringVariants}
-        className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-12"
+        className="py-40 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-12"
       >
         <div className="text-center space-y-2">
-          <span className="text-xs font-semibold text-amber-800 dark:text-liturgy-gold tracking-widest uppercase">
+          <span className="text-xs font-semibold text-amber-800 dark:text-cyber-gold tracking-widest uppercase">
             Faith and Reason Inquiry
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-liturgy-stone-dark dark:text-liturgy-stone-light">
@@ -507,25 +496,25 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Accordion List */}
-        <div className="space-y-4">
+        {/* Accordion List (Minimalist border lines) */}
+        <div className="divide-y divide-black/5 dark:divide-white/5 border-t border-b border-black/5 dark:border-white/5">
           {faqs.map((faq, index) => {
             const isOpen = openFaqIndex === index;
             return (
               <div 
                 key={index}
-                className="rounded-xl overflow-hidden transition-all duration-300"
+                className="overflow-hidden transition-all duration-300"
               >
-                {/* Skeuomorphic Header Bar Button (Pressing/Depressing with spring physics 200) */}
+                {/* Minimalist Header Switch (Spring physics 200) */}
                 <motion.button
                   onClick={() => toggleFaq(index)}
-                  className={`w-full flex items-center justify-between p-5 text-left font-serif text-sm sm:text-base font-bold transition-all duration-200 border cursor-pointer select-none border-black/5 dark:border-liturgy-gold/20 ${
+                  className={`w-full flex items-center justify-between py-6 text-left font-serif text-sm sm:text-base font-bold transition-all duration-200 cursor-pointer select-none bg-transparent ${
                     isOpen 
-                      ? "bg-black/5 dark:bg-liturgy-stone text-liturgy-cyan shadow-[inset_1px_2px_4px_rgba(0,0,0,0.06)] dark:shadow-neumorphic-pressed rounded-t-xl" 
-                      : "bg-[#FAF9F6] dark:bg-liturgy-stone text-liturgy-stone-dark dark:text-liturgy-stone-light shadow-[4px_4px_10px_rgba(163,163,163,0.15),_-4px_-4px_10px_rgba(255,255,255,0.7)] dark:shadow-neumorphic-flat rounded-xl hover:border-liturgy-cyan/30"
+                      ? "text-liturgy-cyan" 
+                      : "text-liturgy-stone-dark dark:text-liturgy-stone-light"
                   }`}
-                  whileHover={{ scale: 0.995 }}
-                  whileTap={{ scale: 0.985 }}
+                  whileHover={{ x: 4 }}
+                  whileTap={{ scale: 0.99 }}
                   transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 >
                   <span className="max-w-[90%]">{faq.question}</span>
@@ -538,7 +527,7 @@ export default function Home() {
                   </div>
                 </motion.button>
 
-                {/* Glassmorphic answer body drop with spring slide */}
+                {/* Crystal-clear frosted drawer with zero background color distortion */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
@@ -547,8 +536,10 @@ export default function Home() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ type: "spring", stiffness: 200, damping: 20 }}
                     >
-                      <div className="p-6 bg-white/[0.03] backdrop-blur-xl border-x border-b border-black/5 dark:border-liturgy-gold/10 rounded-b-xl text-xs sm:text-sm leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-gray text-justify shadow-gold-rim">
-                        {faq.answer}
+                      <div className="pb-6 pt-2 bg-transparent text-xs sm:text-sm leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-gray text-justify">
+                        <div className="p-5 rounded-lg border border-black/5 dark:border-white/5 bg-white/5 dark:bg-white/[0.01] backdrop-blur-2xl shadow-none">
+                          {faq.answer}
+                        </div>
                       </div>
                     </motion.div>
                   )}

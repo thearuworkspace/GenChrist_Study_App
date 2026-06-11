@@ -9,10 +9,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Your brand new skeuomorphic-neumorphic core layers
-        'liturgy-dark': '#151515',
-        'liturgy-stone': '#222222',
-        'liturgy-gold': '#D4AF37',
+        // High-end luxury cyber colors
+        'cyber-black': '#050505',
+        'cyber-gold': '#D4AF37',
         
         // Retaining your original nested custom palette so sub-pages don't crash
         liturgy: {
@@ -32,13 +31,12 @@ module.exports = {
       fontFamily: {
         serif: ["var(--font-cinzel)", "Georgia", "serif"],
         sans: ["var(--font-inter)", "Helvetica", "sans-serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
       },
       boxShadow: {
-        // Real tactical extrusion shadows
-        'neumorphic-flat': '6px 6px 14px #0a0a0a, -6px -6px 14px #202020',
-        'neumorphic-pressed': 'inset 4px 4px 8px #0a0a0a, inset -4px -4px 8px #202020',
-        // Metallic edge illumination glow
-        'gold-rim': '0 0 0 1px rgba(212, 175, 55, 0.15), 0 8px 24px rgba(0, 0, 0, 0.6)',
+        // High-end subtle neon gold aura instead of muddy plastic shadows
+        'gold-glow': '0 0 25px rgba(214, 175, 55, 0.08)',
+        'gold-glow-hover': '0 0 40px rgba(214, 175, 55, 0.18)',
       }
     },
   },
