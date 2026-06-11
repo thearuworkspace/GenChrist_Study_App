@@ -19,9 +19,8 @@ export default function StudyIndexPage() {
     visible: { y: 0, opacity: 1, transition: { duration: 0.4, ease: "easeOut" as const } },
   };
 
-
   return (
-    <div className="relative overflow-hidden py-12 sm:py-16 md:py-20">
+    <div className="relative overflow-hidden py-12 sm:py-16 md:py-20 transition-colors duration-300">
       {/* Background Glow */}
       <div className="absolute top-0 right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-gradient-radial from-purple-500/5 to-transparent blur-3xl" />
       <div className="absolute bottom-10 left-10 -z-10 h-[400px] w-[400px] rounded-full bg-gradient-radial from-liturgy-gold/5 to-transparent blur-3xl" />
@@ -35,14 +34,14 @@ export default function StudyIndexPage() {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center space-y-3">
-            <div className="inline-flex items-center space-x-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 px-4 py-1 text-xs font-semibold text-purple-400 tracking-wider uppercase">
+            <div className="inline-flex items-center space-x-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 px-4 py-1 text-xs font-semibold text-purple-600 dark:text-purple-400 tracking-wider uppercase">
               <Sparkles className="h-3.5 w-3.5" />
               <span>Episodic Theology Track</span>
             </div>
-            <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-liturgy-stone-light">
+            <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-liturgy-stone-dark dark:text-liturgy-stone-light transition-colors">
               Conversational Study Episodes
             </h1>
-            <p className="mx-auto max-w-2xl text-sm sm:text-base text-liturgy-stone-gray">
+            <p className="mx-auto max-w-2xl text-sm sm:text-base text-liturgy-stone-dark/80 dark:text-liturgy-stone-gray">
               Engage with immersive, structured narrative prose that speaks directly to you. Unlock the deep theology, catechism teachings, and historical contexts under golden triggers.
             </p>
           </motion.div>
@@ -53,34 +52,34 @@ export default function StudyIndexPage() {
               <Link
                 key={episode.id}
                 href={`/study/${episode.id}`}
-                className="group relative flex flex-col justify-between rounded-xl border border-liturgy-stone-dark bg-liturgy-stone-dark/30 p-6 shadow-md hover:bg-liturgy-stone-dark/50 hover:border-purple-500/40 transition-all duration-300"
+                className="group relative flex flex-col justify-between rounded-xl border border-black/5 dark:border-white/5 bg-white dark:bg-[#1c1c1a]/30 p-6 shadow-[4px_4px_10px_rgba(163,163,163,0.15),_-4px_-4px_10px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_20px_rgba(0,0,0,0.4),_-6px_-6px_20px_rgba(255,255,255,0.01)] hover:bg-black/[0.01] dark:hover:bg-[#1c1c1a]/50 hover:border-purple-500/40 dark:hover:border-purple-500/40 transition-all duration-300"
               >
                 {/* Number Badge */}
-                <div className="absolute top-6 right-6 font-serif text-3xl font-extrabold text-liturgy-stone-dark/60 group-hover:text-purple-500/20 transition-colors">
+                <div className="absolute top-6 right-6 font-serif text-3xl font-extrabold text-black/5 dark:text-white/5 group-hover:text-purple-500/10 transition-colors">
                   0{index + 1}
                 </div>
 
                 <div className="space-y-4 max-w-[85%]">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400">
                     <BookMarked className="h-5 w-5" />
                   </div>
                   
                   <div className="space-y-1">
-                    <h3 className="font-serif text-xl font-bold text-liturgy-stone-light group-hover:text-purple-400 transition-colors">
+                    <h3 className="font-serif text-xl font-bold text-liturgy-stone-dark dark:text-liturgy-stone-light group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                       {episode.title}
                     </h3>
-                    <p className="text-xs text-liturgy-stone-gray flex items-center space-x-1">
-                      <Flame className="h-3.5 w-3.5 text-liturgy-gold inline" />
+                    <p className="text-xs text-liturgy-stone-dark/60 dark:text-liturgy-stone-gray flex items-center space-x-1">
+                      <Flame className="h-3.5 w-3.5 text-amber-800 dark:text-liturgy-gold inline" />
                       <span>{Object.keys(episode.triggers).length} Theological Triggers</span>
                     </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-liturgy-stone-gray leading-relaxed">
+                  <p className="text-xs sm:text-sm text-liturgy-stone-dark/70 dark:text-liturgy-stone-gray leading-relaxed">
                     {episode.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-liturgy-stone-dark/60 flex items-center justify-between text-xs font-semibold text-purple-400 group-hover:text-purple-300 transition-colors uppercase tracking-wider">
+                <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/10 flex items-center justify-between text-xs font-semibold text-purple-600 dark:text-purple-400 group-hover:text-purple-800 dark:group-hover:text-purple-300 transition-colors uppercase tracking-wider">
                   <span>Start Reading</span>
                   <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </div>

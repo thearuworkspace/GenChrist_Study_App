@@ -26,7 +26,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${cinzel.variable}`}>
-      <body className="flex min-h-screen flex-col bg-liturgy-charcoal text-liturgy-stone-light font-sans antialiased">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'light') {
+                  document.documentElement.classList.add('light')
+                  document.documentElement.classList.remove('dark')
+                } else {
+                  document.documentElement.classList.add('dark')
+                  document.documentElement.classList.remove('light')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="flex min-h-screen flex-col bg-liturgy-stone-light text-liturgy-stone-dark dark:bg-liturgy-charcoal dark:text-liturgy-stone-light transition-colors duration-300 font-sans antialiased">
         <Navbar />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />
@@ -34,3 +51,4 @@ export default function RootLayout({
     </html>
   );
 }
+
