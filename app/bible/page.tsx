@@ -102,47 +102,53 @@ export default function BiblePage() {
       <div className="absolute top-1/2 left-1/4 -z-10 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-liturgy-gold/5 blur-3xl" />
       <div className="absolute bottom-0 right-10 -z-10 h-[400px] w-[400px] rounded-full bg-liturgy-cyan/5 blur-3xl" />
 
-      {/* LEFT COLUMN: CONTROL PANEL & BIBLE SCRIPTURE PANELS */}
-      <div className="flex-1 flex flex-col h-full overflow-hidden border-r border-black/5 dark:border-white/10">
-        
-        {/* Navigation Selector Bar */}
-        <div className="border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#1c1c1a]/60 backdrop-blur-md p-4 flex flex-wrap gap-4 items-center justify-between transition-colors duration-300">
-          <div className="flex items-center space-x-2 text-liturgy-stone-dark dark:text-liturgy-stone-light">
-            <Book className="h-5 w-5 text-liturgy-gold" />
-            <h2 className="font-serif text-lg font-bold">Scripture</h2>
+      {/* COLUMN 1: LEFT SIDEBAR NAVIGATION TREE */}
+      <div className="w-64 border-r border-white/5 flex flex-col bg-white/[0.01] backdrop-blur-2xl overflow-y-auto custom-scrollbar">
+        <div className="p-4 border-b border-white/5 flex items-center space-x-2 text-liturgy-stone-light">
+          <Book className="h-5 w-5 text-liturgy-gold" />
+          <h2 className="font-serif text-lg font-bold">Canon</h2>
+        </div>
+        <div className="p-4 space-y-4">
+          <div className="space-y-1">
+            <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Books</h3>
+            {books.map((b, i) => (
+              <button
+                key={b.id}
+                onClick={() => handleSelectBook(i)}
+                className={`w-full text-left px-3 py-1.5 rounded-md text-sm transition-colors ${
+                  selectedBookIndex === i
+                    ? "bg-white/10 text-liturgy-cyan font-semibold"
+                    : "text-liturgy-stone-gray hover:bg-white/5 hover:text-liturgy-stone-light"
+                }`}
+              >
+                {b.name}
+              </button>
+            ))}
           </div>
-          
-          <div className="flex items-center space-x-3">
-            {/* Book Selector (Skeuomorphic depth borders) */}
-            <select
-              value={selectedBookIndex}
-              onChange={(e) => handleSelectBook(Number(e.target.value))}
-              className="bg-white dark:bg-liturgy-stone-dark border border-black/10 dark:border-white/10 rounded-md px-3 py-1.5 text-sm text-liturgy-stone-dark dark:text-liturgy-stone-light focus:outline-none focus:border-liturgy-cyan transition-colors"
-            >
-              {books.map((b, i) => (
-                <option key={b.id} value={i}>
-                  {b.name}
-                </option>
-              ))}
-            </select>
 
-            {/* Chapter Selector (Skeuomorphic depth borders) */}
-            <select
-              value={selectedChapterNumber}
-              onChange={(e) => handleSelectChapter(Number(e.target.value))}
-              className="bg-white dark:bg-liturgy-stone-dark border border-black/10 dark:border-white/10 rounded-md px-3 py-1.5 text-sm text-liturgy-stone-dark dark:text-liturgy-stone-light focus:outline-none focus:border-liturgy-cyan transition-colors"
-            >
+          <div className="space-y-1 pt-4 border-t border-white/5">
+            <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Chapters</h3>
+            <div className="grid grid-cols-4 gap-2">
               {currentBook.chapters.map((c) => (
-                <option key={c.chapter} value={c.chapter}>
-                  Chapter {c.chapter}
-                </option>
+                <button
+                  key={c.chapter}
+                  onClick={() => handleSelectChapter(c.chapter)}
+                  className={`px-2 py-1.5 rounded-md text-xs text-center transition-colors ${
+                    selectedChapterNumber === c.chapter
+                      ? "bg-white/10 text-liturgy-gold font-semibold"
+                      : "text-liturgy-stone-gray hover:bg-white/5 hover:text-liturgy-stone-light"
+                  }`}
+                >
+                  {c.chapter}
+                </button>
               ))}
-            </select>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Scripture Reading Content */}
-        <div className="flex-1 overflow-y-auto p-6 md:p-8 lg:p-12 custom-scrollbar">
+      {/* COLUMN 2: SCRIPTURE READING CONTENT */}
+      <div className="flex-1 overflow-y-auto p-6 md:p-8 lg:p-12 custom-scrollbar bg-white/[0.01] backdrop-blur-2xl">
           <div className="max-w-2xl mx-auto space-y-8">
             {/* Chapter Heading */}
             <div className="text-center space-y-2">
@@ -207,10 +213,9 @@ export default function BiblePage() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* RIGHT PANEL: DESKTOP DUAL-PANE VIEWPORT (Glassmorphism layout) */}
-      <div className="hidden lg:block w-[400px] xl:w-[460px] h-full overflow-y-auto bg-white/60 dark:bg-[#1c1c1a]/60 backdrop-blur-md border-l border-black/5 dark:border-white/10 custom-scrollbar relative transition-colors duration-300">
+      {/* COLUMN 3: RIGHT INFORMATIONAL PANEL */}
+      <div className="hidden lg:block w-[400px] xl:w-[460px] h-full overflow-y-auto bg-white/[0.01] backdrop-blur-2xl border-l border-white/5 custom-scrollbar relative transition-colors duration-300">
         <AnimatePresence mode="wait">
           {selectedVerse ? (
             <motion.div

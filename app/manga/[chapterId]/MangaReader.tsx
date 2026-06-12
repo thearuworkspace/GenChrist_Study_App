@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, ChevronLeft, ChevronRight, Server, Compass, Maximize2 } from "lucide-react";
@@ -23,6 +23,11 @@ interface Chapter {
 export default function MangaReader({ chapter }: { chapter: Chapter }) {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [currentPageIndex]);
 
   const currentPage = chapter.pages[currentPageIndex];
 
@@ -85,7 +90,7 @@ export default function MangaReader({ chapter }: { chapter: Chapter }) {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-stretch">
           
           {/* Main Visual Panels Box (Takes 3 cols on lg, Neumorphic card style) */}
-          <div className="lg:col-span-3 flex flex-col justify-center rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-[#1c1c1a]/30 p-4 sm:p-6 shadow-[4px_4px_15px_rgba(163,163,163,0.15),_-4px_-4px_15px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_25px_rgba(0,0,0,0.5),_-6px_-6px_25px_rgba(255,255,255,0.015)] relative min-h-[400px] sm:min-h-[500px] transition-colors duration-300">
+          <div className="lg:col-span-3 flex flex-col justify-center rounded-2xl border border-white/5 bg-white/[0.01] backdrop-blur-2xl p-4 sm:p-6 shadow-[4px_4px_15px_rgba(163,163,163,0.15),_-4px_-4px_15px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_25px_rgba(0,0,0,0.5),_-6px_-6px_25px_rgba(255,255,255,0.015)] relative min-h-[400px] sm:min-h-[500px] transition-colors duration-300">
             <div className="relative flex-grow flex items-center justify-center overflow-hidden rounded-xl bg-liturgy-charcoal border border-black/10 dark:border-white/10 shadow-inner">
               <AnimatePresence initial={false} custom={direction} mode="wait">
                 <motion.div
@@ -102,11 +107,13 @@ export default function MangaReader({ chapter }: { chapter: Chapter }) {
                     whileHover={{ scale: 1.015 }}
                     className="relative max-w-full max-h-[450px] overflow-hidden rounded-lg border border-liturgy-stone-dark/30 shadow-xl cursor-zoom-in group"
                   >
+                    {!imageLoaded && <div className="absolute inset-0 animate-pulse bg-white/10 rounded-lg z-10" />}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
+                      onLoad={() => setImageLoaded(true)}
                       src={currentPage.imageUrl}
                       alt={`Page ${currentPage.pageNumber}`}
-                      className="object-contain max-h-[450px] w-auto transition-all duration-300 group-hover:brightness-105"
+                      className="object-contain max-h-[450px] w-auto transition-all duration-300 group-hover:brightness-105 relative z-20"
                     />
                     
                     {/* Zoom icon tooltip */}
@@ -161,7 +168,7 @@ export default function MangaReader({ chapter }: { chapter: Chapter }) {
           </div>
 
           {/* Right Pane Details (Takes 1 col on lg, Neumorphic styling) */}
-          <div className="lg:col-span-1 flex flex-col justify-between rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-[#1c1c1a]/40 p-5 sm:p-6 shadow-md transition-colors duration-300 space-y-6">
+          <div className="lg:col-span-1 flex flex-col justify-between rounded-2xl border border-white/5 bg-white/[0.01] backdrop-blur-2xl p-5 sm:p-6 shadow-md transition-colors duration-300 space-y-6">
             <div className="space-y-4">
               <div className="flex items-center space-x-2 text-xs font-semibold text-liturgy-cyan uppercase tracking-wider">
                 <Compass className="h-4 w-4" />

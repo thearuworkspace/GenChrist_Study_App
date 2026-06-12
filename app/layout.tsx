@@ -43,7 +43,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex min-h-screen flex-col bg-liturgy-stone-light text-liturgy-stone-dark dark:bg-liturgy-charcoal dark:text-liturgy-stone-light transition-colors duration-300 font-sans antialiased">
+      <body className="flex min-h-screen flex-col bg-[#050505] text-liturgy-stone-light transition-colors duration-300 font-sans antialiased">
         <Navbar />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />

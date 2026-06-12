@@ -43,14 +43,16 @@ export default function EpisodeReader({ episode }: { episode: Episode }) {
         const term = trigger ? trigger.term : "Theology";
         
         return (
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             key={`trigger-${lineIndex}-${triggerKey}`}
             onClick={() => handleTriggerClick(triggerKey)}
-            className="mx-1 inline-flex items-center rounded-md bg-amber-500/10 dark:bg-liturgy-gold/10 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-liturgy-gold border border-amber-800/20 dark:border-liturgy-gold/30 hover:bg-amber-500/20 dark:hover:bg-liturgy-gold/25 hover:scale-105 active:scale-95 shadow-sm transition-all duration-200"
+            className="mx-1 inline-flex items-center rounded-md bg-white/[0.02] backdrop-blur-md px-2 py-0.5 text-xs font-semibold text-liturgy-gold border border-white/10 hover:bg-white/[0.05] shadow-sm transition-colors duration-200"
             title={`Theological Context: ${term}`}
           >
             [Why?]
-          </button>
+          </motion.button>
         );
       }
     });
@@ -58,6 +60,15 @@ export default function EpisodeReader({ episode }: { episode: Episode }) {
 
   return (
     <div className="relative flex-grow flex flex-col justify-center py-10 sm:py-16 md:py-20 px-4 sm:px-6 transition-colors duration-300">
+      <div className="hidden lg:flex absolute left-0 top-0 h-full w-12 flex-col items-center py-8 border-r border-white/5 bg-white/[0.01] backdrop-blur-2xl z-20">
+        <span className="-rotate-90 text-[10px] text-white/50 tracking-widest whitespace-nowrap mt-20">CANON TRACKING: ACTIVE</span>
+      </div>
+      <div className="absolute top-0 left-0 w-full lg:pl-12 bg-white/[0.01] backdrop-blur-2xl border-b border-white/5 p-2 px-4 flex justify-between text-xs text-white/50 z-10">
+        <span>Canon Tracking: Active</span>
+        <span>Category: Theology</span>
+        <span>Time Metrics Logged</span>
+      </div>
+
       {/* Background radial overlays */}
       <div className="absolute top-0 right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-gradient-radial from-purple-500/5 to-transparent blur-3xl animate-pulse" />
       <div className="absolute bottom-10 left-10 -z-10 h-[400px] w-[400px] rounded-full bg-gradient-radial from-liturgy-cyan/5 to-transparent blur-3xl animate-pulse" />
@@ -77,7 +88,7 @@ export default function EpisodeReader({ episode }: { episode: Episode }) {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-[#1c1c1a]/30 shadow-[4px_4px_15px_rgba(163,163,163,0.15),_-4px_-4px_15px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_30px_rgba(0,0,0,0.5),_-6px_-6px_30px_rgba(255,255,255,0.015)] p-6 sm:p-10 space-y-8 transition-colors duration-300"
+          className="rounded-2xl border border-white/5 bg-white/[0.01] backdrop-blur-2xl shadow-[4px_4px_15px_rgba(163,163,163,0.15),_-4px_-4px_15px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_30px_rgba(0,0,0,0.5),_-6px_-6px_30px_rgba(255,255,255,0.015)] p-6 sm:p-10 space-y-8 transition-colors duration-300"
         >
           {/* Episode Heading */}
           <div className="border-b border-black/5 dark:border-white/10 pb-6 space-y-2">

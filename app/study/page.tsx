@@ -21,6 +21,15 @@ export default function StudyIndexPage() {
 
   return (
     <div className="relative overflow-hidden py-12 sm:py-16 md:py-20 transition-colors duration-300">
+      <div className="hidden lg:flex absolute left-0 top-0 h-full w-12 flex-col items-center py-8 border-r border-white/5 bg-white/[0.01] backdrop-blur-2xl z-20">
+        <span className="-rotate-90 text-[10px] text-white/50 tracking-widest whitespace-nowrap mt-20">CANON TRACKING: ACTIVE</span>
+      </div>
+      <div className="absolute top-0 w-full lg:pl-12 bg-white/[0.01] backdrop-blur-2xl border-b border-white/5 p-2 px-4 flex justify-between text-xs text-white/50 z-10">
+        <span>Canon Tracking: Active</span>
+        <span>Category: Theology</span>
+        <span>Time Metrics Logged</span>
+      </div>
+
       {/* Background Glow */}
       <div className="absolute top-0 right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-gradient-radial from-purple-500/5 to-transparent blur-3xl" />
       <div className="absolute bottom-10 left-10 -z-10 h-[400px] w-[400px] rounded-full bg-gradient-radial from-liturgy-gold/5 to-transparent blur-3xl" />
@@ -52,7 +61,7 @@ export default function StudyIndexPage() {
               <Link
                 key={episode.id}
                 href={`/study/${episode.id}`}
-                className="group relative flex flex-col justify-between rounded-xl border border-black/5 dark:border-white/5 bg-white dark:bg-[#1c1c1a]/30 p-6 shadow-[4px_4px_10px_rgba(163,163,163,0.15),_-4px_-4px_10px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_20px_rgba(0,0,0,0.4),_-6px_-6px_20px_rgba(255,255,255,0.01)] hover:bg-black/[0.01] dark:hover:bg-[#1c1c1a]/50 hover:border-purple-500/40 dark:hover:border-purple-500/40 transition-all duration-300"
+                className="group relative flex flex-col justify-between rounded-xl border border-white/5 bg-white/[0.01] backdrop-blur-2xl p-6 shadow-[4px_4px_10px_rgba(163,163,163,0.15),_-4px_-4px_10px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_20px_rgba(0,0,0,0.4),_-6px_-6px_20px_rgba(255,255,255,0.01)] hover:bg-white/[0.03] hover:border-purple-500/40 transition-all duration-300"
               >
                 {/* Number Badge */}
                 <div className="absolute top-6 right-6 font-serif text-3xl font-extrabold text-black/5 dark:text-white/5 group-hover:text-purple-500/10 transition-colors">

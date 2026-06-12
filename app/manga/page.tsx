@@ -52,7 +52,7 @@ export default function MangaIndexPage() {
               <Link
                 key={chapter.id}
                 href={`/manga/${chapter.id}`}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-[#1c1c1a]/30 hover:border-liturgy-cyan/40 dark:hover:border-liturgy-cyan/40 shadow-[4px_4px_12px_rgba(163,163,163,0.15),_-4px_-4px_12px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_20px_rgba(0,0,0,0.4),_-6px_-6px_20px_rgba(255,255,255,0.015)] transition-all duration-300"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-white/[0.01] backdrop-blur-2xl hover:border-liturgy-cyan/40 shadow-[4px_4px_12px_rgba(163,163,163,0.15),_-4px_-4px_12px_rgba(255,255,255,0.7)] dark:shadow-[10px_10px_20px_rgba(0,0,0,0.4),_-6px_-6px_20px_rgba(255,255,255,0.015)] transition-all duration-300"
               >
                 {/* Image container with smooth scaling on hover */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-liturgy-charcoal border-b border-black/5 dark:border-white/5">
