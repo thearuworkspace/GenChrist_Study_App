@@ -36,13 +36,13 @@ interface BookData {
 
 interface VerseCommentary {
   chapter: number;
-  verse: number;
-  why_jesus_said_it: string;
-  ccc_validation: string;
-  historical_reality: string;
-  translation_shift: string;
-  cross_references: string[];
-  fascinating_fact: string;
+  verseNumber: number;
+  dominicalIntent: string;
+  cccReferences: string;
+  historicalContext: string;
+  translationNuances: string;
+  crossReferences: string;
+  historicalTrivia: string;
 }
 
 export default function BiblePage() {
@@ -143,14 +143,14 @@ export default function BiblePage() {
     setCommentaryError(false);
     setCommentaryData(null);
 
-    const bookKey = selectedBookName.toLowerCase();
+    const bookKey = selectedBookName.toLowerCase().replace(/\s+/g, '');
     
     import(`@/data/commentary/${bookKey}.json`)
       .then((module) => {
         if (!isMounted) return;
         const list = module.default as VerseCommentary[];
         const match = list.find(
-          (item) => item.chapter === selectedChapter && item.verse === selectedVerse
+          (item) => item.chapter === selectedChapter && item.verseNumber === selectedVerse
         );
         if (match) {
           setCommentaryData(match);
@@ -340,47 +340,47 @@ export default function BiblePage() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {/* 1. Why Jesus Said It */}
+                  {/* 1. Dominical & Typological Intent */}
                   <div className="space-y-2 p-4 rounded-xl bg-amber-500/5 border border-amber-500/20 backdrop-blur-sm shadow-[0_0_15px_rgba(245,158,11,0.02)]">
                     <div className="flex items-center space-x-2 text-xs font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wider">
                       <Flame className="h-4 w-4 text-amber-500" />
-                      <span>Why?</span>
+                      <span>Dominical &amp; Typological Intent</span>
                     </div>
                     <p className="text-sm leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.why_jesus_said_it}
+                      {commentaryData.dominicalIntent}
                     </p>
                   </div>
 
-                  {/* 2. Catechism Connection */}
+                  {/* 2. Catechism Syntheses */}
                   <div className="space-y-2 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20 backdrop-blur-sm shadow-[0_0_15px_rgba(16,185,129,0.02)]">
                     <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
                       <BookOpenText className="h-4 w-4 text-emerald-500" />
-                      <span>Catechism Connection</span>
+                      <span>Catechism Syntheses</span>
                     </div>
                     <p className="text-sm leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.ccc_validation}
+                      {commentaryData.cccReferences}
                     </p>
                   </div>
 
-                  {/* 3. Historical Reality */}
+                  {/* 3. Historical Context */}
                   <div className="space-y-2 p-4 rounded-xl bg-blue-500/5 border border-blue-500/20 backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.02)]">
                     <div className="flex items-center space-x-2 text-xs font-semibold text-blue-700 dark:text-blue-400 uppercase tracking-wider">
                       <Compass className="h-4 w-4 text-blue-500" />
-                      <span>Historical Reality</span>
+                      <span>Historical Context</span>
                     </div>
                     <p className="text-sm leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.historical_reality}
+                      {commentaryData.historicalContext}
                     </p>
                   </div>
 
-                  {/* 4. Linguistic / Translation Shift */}
+                  {/* 4. Linguistic & Translation Nuances */}
                   <div className="space-y-2 p-4 rounded-xl bg-purple-500/5 border border-purple-500/20 backdrop-blur-sm shadow-[0_0_15px_rgba(139,92,246,0.02)]">
                     <div className="flex items-center space-x-2 text-xs font-semibold text-purple-700 dark:text-purple-400 uppercase tracking-wider">
                       <Languages className="h-4 w-4 text-purple-500" />
-                      <span>Linguistic / Translation Shift</span>
+                      <span>Linguistic &amp; Translation Nuances</span>
                     </div>
                     <p className="text-sm leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.translation_shift}
+                      {commentaryData.translationNuances}
                     </p>
                   </div>
 
@@ -388,34 +388,34 @@ export default function BiblePage() {
                   <div className="space-y-2 p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 backdrop-blur-sm shadow-[0_0_15px_rgba(99,102,241,0.02)]">
                     <div className="flex items-center space-x-2 text-xs font-semibold text-indigo-700 dark:text-indigo-400 uppercase tracking-wider">
                       <LinkIcon className="h-4 w-4 text-indigo-500" />
-                      <span>Commentary Cross References</span>
+                      <span>Cross References</span>
                     </div>
-                    {commentaryData.cross_references && commentaryData.cross_references.length > 0 ? (
+                    {commentaryData.crossReferences ? (
                       <div className="flex flex-wrap gap-2 pt-1">
-                        {commentaryData.cross_references.map((ref, idx) => (
+                        {commentaryData.crossReferences.split(';').map((ref, idx) => (
                           <span 
                             key={idx}
                             className="px-2.5 py-1 rounded bg-indigo-500/10 dark:bg-indigo-400/10 text-xs font-medium text-indigo-700 dark:text-indigo-300 border border-indigo-500/20"
                           >
-                            {ref}
+                            {ref.trim()}
                           </span>
                         ))}
                       </div>
                     ) : (
                       <p className="text-xs italic text-liturgy-stone-dark/40 dark:text-liturgy-stone-gray">
-                        No specific commentary cross references for this verse.
+                        No specific cross references for this verse.
                       </p>
                     )}
                   </div>
 
-                  {/* 6. Fascinating Fact */}
+                  {/* 6. Scientific & Archaeological Trivia */}
                   <div className="space-y-2 p-4 rounded-xl bg-rose-500/5 border border-rose-500/20 backdrop-blur-sm shadow-[0_0_15px_rgba(244,63,94,0.02)]">
                     <div className="flex items-center space-x-2 text-xs font-semibold text-rose-700 dark:text-rose-400 uppercase tracking-wider">
                       <Sparkles className="h-4 w-4 text-rose-500" />
-                      <span>Fascinating Fact</span>
+                      <span>Scientific &amp; Archaeological Trivia</span>
                     </div>
                     <p className="text-sm leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.fascinating_fact}
+                      {commentaryData.historicalTrivia}
                     </p>
                   </div>
                 </div>
@@ -533,47 +533,47 @@ export default function BiblePage() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {/* 1. Why Jesus Said It */}
+                  {/* 1. Dominical & Typological Intent */}
                   <div className="space-y-1.5 p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 backdrop-blur-sm">
                     <div className="flex items-center space-x-1.5 text-[11px] font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wider">
                       <Flame className="h-3.5 w-3.5 text-amber-500" />
-                      <span>Why?</span>
+                      <span>Dominical &amp; Typological Intent</span>
                     </div>
                     <p className="text-xs leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.why_jesus_said_it}
+                      {commentaryData.dominicalIntent}
                     </p>
                   </div>
 
-                  {/* 2. Catechism Connection */}
+                  {/* 2. Catechism Syntheses */}
                   <div className="space-y-1.5 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/20 backdrop-blur-sm">
                     <div className="flex items-center space-x-1.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
                       <BookOpenText className="h-3.5 w-3.5 text-emerald-500" />
-                      <span>Catechism Connection</span>
+                      <span>Catechism Syntheses</span>
                     </div>
                     <p className="text-xs leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.ccc_validation}
+                      {commentaryData.cccReferences}
                     </p>
                   </div>
 
-                  {/* 3. Historical Reality */}
+                  {/* 3. Historical Context */}
                   <div className="space-y-1.5 p-3 rounded-xl bg-blue-500/5 border border-blue-500/20 backdrop-blur-sm">
                     <div className="flex items-center space-x-1.5 text-[11px] font-semibold text-blue-700 dark:text-blue-400 uppercase tracking-wider">
                       <Compass className="h-3.5 w-3.5 text-blue-500" />
-                      <span>Historical Reality</span>
+                      <span>Historical Context</span>
                     </div>
                     <p className="text-xs leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.historical_reality}
+                      {commentaryData.historicalContext}
                     </p>
                   </div>
 
-                  {/* 4. Linguistic / Translation Shift */}
+                  {/* 4. Linguistic & Translation Nuances */}
                   <div className="space-y-1.5 p-3 rounded-xl bg-purple-500/5 border border-purple-500/20 backdrop-blur-sm">
                     <div className="flex items-center space-x-1.5 text-[11px] font-semibold text-purple-700 dark:text-purple-400 tracking-wider uppercase">
                       <Languages className="h-3.5 w-3.5 text-purple-500" />
-                      <span>Linguistic / Translation Shift</span>
+                      <span>Linguistic &amp; Translation Nuances</span>
                     </div>
                     <p className="text-xs leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.translation_shift}
+                      {commentaryData.translationNuances}
                     </p>
                   </div>
 
@@ -581,34 +581,34 @@ export default function BiblePage() {
                   <div className="space-y-1.5 p-3 rounded-xl bg-indigo-500/5 border border-indigo-500/20 backdrop-blur-sm">
                     <div className="flex items-center space-x-1.5 text-[11px] font-semibold text-indigo-700 dark:text-indigo-400 tracking-wider uppercase">
                       <LinkIcon className="h-3.5 w-3.5 text-indigo-500" />
-                      <span>Commentary Cross References</span>
+                      <span>Cross References</span>
                     </div>
-                    {commentaryData.cross_references && commentaryData.cross_references.length > 0 ? (
+                    {commentaryData.crossReferences ? (
                       <div className="flex flex-wrap gap-1.5 pt-0.5">
-                        {commentaryData.cross_references.map((ref, idx) => (
+                        {commentaryData.crossReferences.split(';').map((ref, idx) => (
                           <span 
                             key={idx}
                             className="px-2 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-400/10 text-[10px] font-medium text-indigo-700 dark:text-indigo-300 border border-indigo-500/20"
                           >
-                            {ref}
+                            {ref.trim()}
                           </span>
                         ))}
                       </div>
                     ) : (
                       <p className="text-[10px] italic text-liturgy-stone-dark/40 dark:text-liturgy-stone-gray">
-                        No specific commentary cross references for this verse.
+                        No specific cross references for this verse.
                       </p>
                     )}
                   </div>
 
-                  {/* 6. Fascinating Fact */}
+                  {/* 6. Scientific & Archaeological Trivia */}
                   <div className="space-y-1.5 p-3 rounded-xl bg-rose-500/5 border border-rose-500/20 backdrop-blur-sm">
                     <div className="flex items-center space-x-1.5 text-[11px] font-semibold text-rose-700 dark:text-rose-400 tracking-wider uppercase">
                       <Sparkles className="h-3.5 w-3.5 text-rose-500" />
-                      <span>Fascinating Fact</span>
+                      <span>Scientific &amp; Archaeological Trivia</span>
                     </div>
                     <p className="text-xs leading-relaxed text-liturgy-stone-dark/80 dark:text-liturgy-stone-light/85">
-                      {commentaryData.fascinating_fact}
+                      {commentaryData.historicalTrivia}
                     </p>
                   </div>
                 </div>
